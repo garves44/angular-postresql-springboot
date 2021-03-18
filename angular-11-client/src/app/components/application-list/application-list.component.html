@@ -19,45 +19,45 @@
     </div>
   </div>
   <div class="col-md-6">
-    <h4>Tutorials List</h4>
+    <h4>Applications List</h4>
     <ul class="list-group">
       <li
         class="list-group-item"
-        *ngFor="let tutorial of tutorials; let i = index"
+        *ngFor="let application of applications; let i = index"
         [class.active]="i == currentIndex"
-        (click)="setActiveTutorial(tutorial, i)"
+        (click)="setActiveApplication(application, i)"
       >
-        {{ tutorial.title }}
+        {{ application.title }}
       </li>
     </ul>
 
-    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllApplications()">
       Remove All
     </button>
   </div>
   <div class="col-md-6">
-    <div *ngIf="currentTutorial">
-      <h4>Tutorial</h4>
+    <div *ngIf="currentApplication">
+      <h4>Application</h4>
       <div>
-        <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+        <label><strong>Title:</strong></label> {{ currentApplication.title }}
       </div>
       <div>
         <label><strong>Description:</strong></label>
-        {{ currentTutorial.description }}
+        {{ currentApplication.description }}
       </div>
       <div>
         <label><strong>Status:</strong></label>
-        {{ currentTutorial.published ? "Published" : "Pending" }}
+        {{ currentApplication.published ? "Published" : "Pending" }}
       </div>
 
-      <a class="badge badge-warning" routerLink="/tutorials/{{ currentTutorial.id }}">
+      <a class="badge badge-warning" routerLink="/applications/{{ currentApplication.id }}">
         Edit
       </a>
     </div>
 
-    <div *ngIf="!currentTutorial">
+    <div *ngIf="!currentApplication">
       <br />
-      <p>Please click on a Tutorial...</p>
+      <p>Please click on a Application...</p>
     </div>
   </div>
 </div>

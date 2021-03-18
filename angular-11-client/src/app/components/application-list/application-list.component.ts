@@ -1,29 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { Tutorial } from 'src/app/models/tutorial.model';
-import { TutorialService } from 'src/app/services/tutorial.service';
+import { Application } from 'src/app/models/application.model';
+import { ApplicationService } from 'src/app/services/application.service';
 
 @Component({
-  selector: 'app-tutorials-list',
-  templateUrl: './tutorials-list.component.html',
-  styleUrls: ['./tutorials-list.component.css']
+  selector: 'app-applications-list',
+  templateUrl: './application-list.component.html',
+  styleUrls: ['./application-list.component.css']
 })
-export class TutorialsListComponent implements OnInit {
-  tutorials?: Tutorial[];
-  currentTutorial?: Tutorial;
+export class ApplicationsListComponent implements OnInit {
+  applications?: Application[];
+  currentApplication?: Application;
   currentIndex = -1;
   title = '';
 
-  constructor(private tutorialService: TutorialService) { }
+  constructor(private applicationService: ApplicationService) { }
 
   ngOnInit(): void {
-    this.retrieveTutorials();
+    this.retrieveApplications();
   }
 
-  retrieveTutorials(): void {
-    this.tutorialService.getAll()
+  retrieveApplications(): void {
+    this.applicationService.getAll()
       .subscribe(
         data => {
-          this.tutorials = data;
+          this.applications = data;
           console.log(data);
         },
         error => {
@@ -32,18 +32,18 @@ export class TutorialsListComponent implements OnInit {
   }
 
   refreshList(): void {
-    this.retrieveTutorials();
-    this.currentTutorial = undefined;
+    this.retrieveApplications();
+    this.currentApplication = undefined;
     this.currentIndex = -1;
   }
 
-  setActiveTutorial(tutorial: Tutorial, index: number): void {
-    this.currentTutorial = tutorial;
+  setActiveApplication(application: Application, index: number): void {
+    this.currentApplication = application;
     this.currentIndex = index;
   }
 
-  removeAllTutorials(): void {
-    this.tutorialService.deleteAll()
+  removeAllApplications(): void {
+    this.applicationService.deleteAll()
       .subscribe(
         response => {
           console.log(response);
@@ -55,13 +55,13 @@ export class TutorialsListComponent implements OnInit {
   }
 
   searchTitle(): void {
-    this.currentTutorial = undefined;
+    this.currentApplication = undefined;
     this.currentIndex = -1;
 
-    this.tutorialService.findByTitle(this.title)
+    this.applicationService.findByTitle(this.title)
       .subscribe(
         data => {
-          this.tutorials = data;
+          this.applications = data;
           console.log(data);
         },
         error => {
